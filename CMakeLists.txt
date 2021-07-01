@@ -41,7 +41,7 @@ enable_testing()
 add_executable(${PROJECT_NAME} main.c Person.c)
 add_executable(${PROJECT_NAME}-ut test.cpp Person.c)
 
-target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wextra -Wconversion -Wpedantic -Werror)
+target_compile_options(${PROJECT_NAME} PUBLIC -g -O0 -Wall -Wextra -Wconversion -Wpedantic)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)

@@ -29,3 +29,10 @@ TEST(countryTests, ShouldConvertToStr)
   EXPECT_FALSE(strcmp("Undefined", countryToStr(static_cast<Country>(-1))));
 }
 
+TEST(personTests, ShouldCheckValidity)
+{
+  Person person = {"Angela", "Merkel", COUNTRY_GERMANY};
+  Person invalidPerson = {"John", nullptr, COUNTRY_UNDEFINED};
+  EXPECT_FALSE(isPersonValid(&invalidPerson));
+  EXPECT_TRUE(isPersonValid(&person));
+}

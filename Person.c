@@ -1,6 +1,6 @@
 #include "Person.h"
-#include "string.h"
-#include "stddef.h"
+#include <string.h>
+#include <stddef.h>
 
 static char *COUNTRIES_STR[] =
 {
@@ -32,5 +32,29 @@ char* countryToStr(const Country country)
     return "Undefined";
   }
   return COUNTRIES_STR[country];
+}
+
+bool isPersonValid(const Person *person)
+{
+  return person->name != NULL 
+    && person->surname != NULL;
+}
+
+void readPersonList(const Person *head, FILE *file)
+{
+  if(file == NULL)
+  {
+    file = stdout;
+  }
+  while(head)
+  {
+    fputs("List:\n", file);
+    if(isPersonValid(head))
+    {
+      fprintf(file, "Name: %s\nSurname: %s\nCountry: %s\n",
+          head->name, head->surname, countryToStr(head->country));
+      head = head->next;
+    }
+  }
 }
 

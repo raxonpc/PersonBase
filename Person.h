@@ -1,6 +1,9 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+#include <stdbool.h>
+#include <stdio.h>
+
 enum Country
 {
   COUNTRY_DENMARK,
@@ -23,7 +26,11 @@ struct Person
 };
 typedef struct Person Person;
 
+//Functions
 Country strToCountry(const char*);
 char* countryToStr(const Country);
+bool isPersonValid(const Person*);
+
+void readPersonList(const Person*, FILE*);
 
 #endif /* PERSON_H */
