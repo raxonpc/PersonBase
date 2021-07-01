@@ -1,6 +1,7 @@
 #include "Person.h"
 #include <string.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 static char *COUNTRIES_STR[] =
 {
@@ -58,3 +59,20 @@ void readPersonList(const Person *head, FILE *file)
   }
 }
 
+char* readUntil(char delimiter, FILE *file)
+{
+  if(!file)
+  {
+    return NULL;
+  }
+  char buffer[1024] = {0};
+  char ch = '\0';
+  int count = 0;
+  while((ch = fgetc(file)) != EOF && ch != delimiter)
+  {
+    buffer[count++] = ch;
+  }
+  char* str = malloc(sizeof(char) * count + 1);
+  strcpy(str, buffer);
+  return str;
+}

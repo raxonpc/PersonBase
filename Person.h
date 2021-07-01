@@ -32,5 +32,7 @@ char* countryToStr(const Country);
 bool isPersonValid(const Person*);
 
 void readPersonList(const Person*, FILE*);
+char* readUntil(char, FILE*);
+
 
 #endif /* PERSON_H */
