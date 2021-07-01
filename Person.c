@@ -2,7 +2,7 @@
 #include "string.h"
 #include "stddef.h"
 
-static const char *COUNTRIES_STR[] =
+static char *COUNTRIES_STR[] =
 {
   "Denmark",
   "Dominican Republic",
@@ -25,4 +25,12 @@ Country strToCountry(const char *str)
   return COUNTRY_UNDEFINED;
 }
 
+char* countryToStr(const Country country)
+{
+  if(country < 0 || country >= COUNTRY_UNDEFINED)
+  {
+    return "Undefined";
+  }
+  return COUNTRIES_STR[country];
+}
 

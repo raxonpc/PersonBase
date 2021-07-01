@@ -16,13 +16,14 @@ typedef enum Country Country;
 
 struct Person
 {
-  char *name_;
-  char *surname_;
-  Country country_;
-  struct Person *next_;
+  char *name;
+  char *surname;
+  Country country;
+  struct Person *next;
 };
 typedef struct Person Person;
 
 Country strToCountry(const char*);
+char* countryToStr(const Country);
 
 #endif /* PERSON_H */

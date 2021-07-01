@@ -16,3 +16,16 @@ TEST(countryTests, ShouldConvertToCountry)
   EXPECT_EQ(COUNTRY_UNDEFINED, strToCountry("BULBULATORAIFTGJEQAGWAEGHUIWAHGUIW"));
   EXPECT_EQ(COUNTRY_UNDEFINED, strToCountry("GJIWGUHUWWGHNUIJHIU"));
 }
+
+TEST(countryTests, ShouldConvertToStr)
+{
+  EXPECT_FALSE(strcmp("Denmark", countryToStr(COUNTRY_DENMARK)));
+  EXPECT_FALSE(strcmp("Dominican Republic", countryToStr(COUNTRY_DOMINICAN_REPUBLIC)));
+  EXPECT_FALSE(strcmp("Finland", countryToStr(COUNTRY_FINLAND)));
+  EXPECT_FALSE(strcmp("Germany", countryToStr(COUNTRY_GERMANY)));
+  EXPECT_FALSE(strcmp("Poland", countryToStr(COUNTRY_POLAND)));
+  EXPECT_FALSE(strcmp("Sweden", countryToStr(COUNTRY_SWEDEN)));
+  EXPECT_FALSE(strcmp("Undefined", countryToStr(COUNTRY_UNDEFINED)));
+  EXPECT_FALSE(strcmp("Undefined", countryToStr(static_cast<Country>(-1))));
+}
+
