@@ -84,8 +84,8 @@ void freeStrings(int count, ...)
   va_start(args, count);
   for(int i = 0; i< count; ++i)
   {
-    char** arg = va_arg(args, char**);
-    free(*arg);
+    char* arg = va_arg(args, char*);
+    free(arg);
   }
   va_end(args);
 }
@@ -97,7 +97,7 @@ Person* readPersonFromFile(FILE *file)
   char* country = readUntil('\n', file);
   if(!name || !surname || !country)
   {
-    freeStrings(3, 3, 3, &name, &surname, &country);
+    freeStrings(3, name, surname, country);
     return NULL;
   }
   Person* person = malloc(sizeof(Person));
@@ -105,5 +105,6 @@ Person* readPersonFromFile(FILE *file)
   person->surname = surname;
   person->country = strToCountry(country);
   free(country);
+  person->next = NULL;
   return person;
 }  
