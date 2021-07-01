@@ -7,8 +7,8 @@ int main(int argc, char* argv[])
     FILE *file = fopen(argv[1], "r");
     if(file)
     {
-      char* str = readUntil('.', file);
-      printf("Read string: %s\n", str);
+      Person* person = readPersonFromFile(file);
+      getc(stdin); //breakpoint
     }
   }
 

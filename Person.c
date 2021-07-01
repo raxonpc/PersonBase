@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 static char *COUNTRIES_STR[] =
 {
@@ -76,3 +77,33 @@ char* readUntil(char delimiter, FILE *file)
   strcpy(str, buffer);
   return str;
 }
+
+void freeStrings(int count, ...)
+{
+  va_list args;
+  va_start(args, count);
+  for(int i = 0; i< count; ++i)
+  {
+    char** arg = va_arg(args, char**);
+    free(*arg);
+  }
+  va_end(args);
+}
+
+Person* readPersonFromFile(FILE *file)
+{
+  char* name = readUntil(',', file);
+  char* surname = readUntil(',', file);
+  char* country = readUntil('\n', file);
+  if(!name || !surname || !country)
+  {
+    freeStrings(3, 3, 3, &name, &surname, &country);
+    return NULL;
+  }
+  Person* person = malloc(sizeof(Person));
+  person->name = name;
+  person->surname = surname;
+  person->country = strToCountry(country);
+  free(country);
+  return person;
+}  
