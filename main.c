@@ -20,5 +20,8 @@ int main(int argc, char* argv[])
 
   readPersonList(head, NULL);
 
+  freePersonList(head);
+
+
   return 0;
 }

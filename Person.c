@@ -60,6 +60,38 @@ void readPersonList(const Person *head, FILE *file)
   }
 }
 
+void freeStrings(int count, ...)
+{
+  va_list args;
+  va_start(args, count);
+  for(int i = 0; i< count; ++i)
+  {
+    char* arg = va_arg(args, char*);
+    free(arg);
+  }
+  va_end(args);
+}
+
+void freePerson(Person *person)
+{
+  if(person)
+  {
+    freeStrings(2, person->name, person->surname);
+    free(person);
+  }
+}
+
+void freePersonList(Person *head)
+{
+  Person* current = head;
+  while(head)
+  {
+    current = head->next;
+    freePerson(head);
+    head = current;
+  }
+}  
+
 char* readUntil(char delimiter, FILE *file)
 {
   if(!file || feof(file))
@@ -76,18 +108,6 @@ char* readUntil(char delimiter, FILE *file)
   char* str = malloc(sizeof(char) * count + 1);
   strcpy(str, buffer);
   return str;
-}
-
-void freeStrings(int count, ...)
-{
-  va_list args;
-  va_start(args, count);
-  for(int i = 0; i< count; ++i)
-  {
-    char* arg = va_arg(args, char*);
-    free(arg);
-  }
-  va_end(args);
 }
 
 Person* readPersonFromFile(FILE *file)
