@@ -1,27 +1,14 @@
 #include "Person.h"
 
-int main(int argc, char* argv[])
+int main()
 {
-  FILE *file = NULL;
-  Person *head = NULL;
-  if(argc > 1)
-  {
-    file = fopen(argv[1], "r");
-    if(file)
-    {
-      head = readPersonListFromFile(file);
-      fclose(file);
-    }
-  }
-  if(!file)
-  {
-    puts("Could not open a file");
-  }
+  puts("Enter people data (end with EOF):");
+  Person *head = readPersonListFromFile(stdin);
 
-  readPersonList(head, NULL);
-
+  FILE *file = fopen("../file.txt", "w");
+  readPersonList(head, file);
+  
   freePersonList(head);
-
 
   return 0;
 }

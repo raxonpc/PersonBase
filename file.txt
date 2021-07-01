@@ -1,1 +1,16 @@
-Simon,Zemke,Poland
+----------List----------
+Name: Szymon
+Surname: Zemke
+Country: Poland
+Name: Andrzej
+Surname: Duda
+Country: Poland
+Name: Some
+Surname: Guy
+Country: Finland
+Name: Angela
+Surname: Merkel
+Country: Germany
+Name: John
+Surname: Smith
+Country: Sweden
