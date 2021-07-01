@@ -36,5 +36,7 @@ void readPersonList(const Person*, FILE*);
 char* readUntil(char, FILE*);
 Person* readPersonFromFile(FILE*);
 
+Person* readPersonListFromFile(FILE*);
+
 
 #endif /* PERSON_H */

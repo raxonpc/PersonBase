@@ -48,9 +48,9 @@ void readPersonList(const Person *head, FILE *file)
   {
     file = stdout;
   }
+  fputs("----------List----------\n", file);
   while(head)
   {
-    fputs("List:\n", file);
     if(isPersonValid(head))
     {
       fprintf(file, "Name: %s\nSurname: %s\nCountry: %s\n",
@@ -62,7 +62,7 @@ void readPersonList(const Person *head, FILE *file)
 
 char* readUntil(char delimiter, FILE *file)
 {
-  if(!file)
+  if(!file || feof(file))
   {
     return NULL;
   }
@@ -108,3 +108,23 @@ Person* readPersonFromFile(FILE *file)
   person->next = NULL;
   return person;
 }  
+
+Person* readPersonListFromFile(FILE *file)
+{
+  if(!file)
+  {
+    return NULL;
+  }
+  Person* head = NULL;
+  Person** current = &head;
+  while(!feof(file))
+  {
+    *current = readPersonFromFile(file);
+    if(!current)
+    {
+      break;
+    }
+    current = &(*current)->next;
+  }
+  return head;
+}

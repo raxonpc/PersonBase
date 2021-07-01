@@ -2,15 +2,23 @@
 
 int main(int argc, char* argv[])
 {
+  FILE *file = NULL;
+  Person *head = NULL;
   if(argc > 1)
   {
-    FILE *file = fopen(argv[1], "r");
+    file = fopen(argv[1], "r");
     if(file)
     {
-      Person* person = readPersonFromFile(file);
-      getc(stdin); //breakpoint
+      head = readPersonListFromFile(file);
+      fclose(file);
     }
   }
+  if(!file)
+  {
+    puts("Could not open a file");
+  }
+
+  readPersonList(head, NULL);
 
   return 0;
 }
