@@ -57,3 +57,25 @@ TEST(personTests, ShouldWriteListToFile)
   iStr.close();
 }
 
+TEST(personTests, ShouldReadFromFile)
+{
+  std::string line1{ "Angela,Merkel,Germany" };
+  std::string line2{ "Linus,Torvalds,Finland" };
+  std::ofstream oStr{ "test1.txt" };
+  oStr << line1 << '\n' << line2;
+  oStr.close();
+
+  FILE *file = fopen("test1.txt", "r");
+  Person *head = readPersonListFromFile(file);
+
+  Person headTest = { "Angela", "Merkel", COUNTRY_GERMANY };
+  Person lastTest = { "Linus", "Torvalds", COUNTRY_FINLAND };
+
+  EXPECT_FALSE(strcmp(head->name, headTest.name));
+  EXPECT_FALSE(strcmp(head->surname, headTest.surname));
+  EXPECT_EQ(head->country, headTest.country);
+
+  EXPECT_FALSE(strcmp(head->next->name, lastTest.name));
+  EXPECT_FALSE(strcmp(head->next->surname, lastTest.surname));
+  EXPECT_EQ(head->next->country, lastTest.country);
+}
