@@ -48,15 +48,14 @@ void readPersonList(const Person *head, FILE *file)
   {
     file = stdout;
   }
-  fputs("----------List----------\n", file);
   while(head)
   {
     if(isPersonValid(head))
     {
-      fprintf(file, "Name: %s\nSurname: %s\nCountry: %s\n",
+      fprintf(file, "%s,%s,%s\n",
           head->name, head->surname, countryToStr(head->country));
-      head = head->next;
     }
+    head = head->next;
   }
 }
 

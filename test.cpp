@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include <fstream>
 
 extern "C" {
 #include "Person.h"
@@ -36,3 +37,23 @@ TEST(personTests, ShouldCheckValidity)
   EXPECT_FALSE(isPersonValid(&invalidPerson));
   EXPECT_TRUE(isPersonValid(&person));
 }
+
+TEST(personTests, ShouldWriteListToFile)
+{
+  Person last = { "Linus", "Torvalds", COUNTRY_FINLAND, nullptr };
+  Person head = { "Angela", "Merkel", COUNTRY_GERMANY, &last };
+
+  FILE *file = fopen("test.txt", "w");
+  readPersonList(&head, file);
+  fclose(file);
+  std::ifstream iStr{ "test.txt" };
+  std::string line1{ "Angela,Merkel,Germany" };
+  std::string line2{ "Linus,Torvalds,Finland" };
+  std::string temp{};
+  iStr >> temp;
+  EXPECT_EQ(temp, line1);
+  iStr >> temp;
+  EXPECT_EQ(temp, line2);
+  iStr.close();
+}
+
