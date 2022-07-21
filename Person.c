@@ -105,7 +105,7 @@ char* readUntil(char delimiter, FILE *file)
     buffer[count++] = ch;
   }
   char* str = malloc(sizeof(char) * count + 1);
-  strcpy(str, buffer);
+  strncpy(str, buffer, 1024);
   return str;
 }
 
